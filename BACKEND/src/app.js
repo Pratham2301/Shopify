@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 
 
 app.use(cors({
-  origin: ['http://localhost:3000', '*'],
+  origin: ['https://shopify-commerce.netlify.app', 'http://localhost:3000', '*'],
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }));
 
