@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+import cors from "cors";
 
 const errorMiddleware = require("./middleware/error");
 
@@ -11,6 +12,13 @@ const errorMiddleware = require("./middleware/error");
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: "src/config/config.env" });
 }
+
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
+
 
 app.use(express.json());
 app.use(cookieParser());
