@@ -9,13 +9,19 @@ const sendToken = (user, statusCode, res) => {
       Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
+    sameSite: "none",
+    secure: "false",
   };
+
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Credentials',true);
 
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
     user,
     token,
   });
+
 };
 
 module.exports = sendToken;

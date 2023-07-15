@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
-import cors from "cors";
+const cors = require("cors");
 
 const errorMiddleware = require("./middleware/error");
 
@@ -15,9 +15,10 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 
 
 app.use(cors({
-  origin: ['https://shopify-commerce.netlify.app', 'http://localhost:3000', '*'],
+  origin: ['https://shopify-commerce.netlify.app', 'http://localhost:3000'],
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-  credentials: true
+  credentials: true,
+  exposedHeaders: ['set-cookie'],
 }));
 
 
