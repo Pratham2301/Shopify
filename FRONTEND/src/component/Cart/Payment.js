@@ -57,7 +57,7 @@ const Payment = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "https://ecommerce-shopify-pzrj.vercel.app/api/v1/payment/process",
         paymentData,
         config
       );

@@ -40,16 +40,16 @@ import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
 import Contact from "./component/layout/Contact/Contact";
-import About from "./component/layout/About/About";
+// import About from "./component/layout/About/About";
 import NotFound from "./component/layout/Not Found/NotFound";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
+  const [stripeApiKey, setStripeApiKey] = useState(null);
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get("https://ecommerce-shopify-pzrj.vercel.app/api/v1/stripeapikey");
 
     setStripeApiKey(data.stripeApiKey);
   }
@@ -90,7 +90,7 @@ function App() {
 
         <Route exact path="/contact" component={Contact} />
 
-        <Route exact path="/about" component={About} />
+        {/* <Route exact path="/about" component={About} /> */}
 
         <ProtectedRoute exact path="/account" component={Profile} />
 
@@ -184,6 +184,8 @@ function App() {
             window.location.pathname === "/process/payment" ? null : NotFound
           }
         />
+
+        <Route component={Home}/>
       </Switch>
 
       <Footer />

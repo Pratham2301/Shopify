@@ -10,6 +10,7 @@ import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 
 const LoginSignUp = ({ history, location }) => {
+
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -71,9 +72,17 @@ const LoginSignUp = ({ history, location }) => {
 
   const redirect = location.search ? location.search.split("=")[1] : "/account";
 
+
+
   useEffect(() => {
+
     if (error) {
-      alert.error(error);
+
+      if(error !== "Please Login to access this resource")
+      {
+        alert.error(error);
+      }
+      
       dispatch(clearErrors());
     }
 
@@ -82,7 +91,10 @@ const LoginSignUp = ({ history, location }) => {
     }
   }, [dispatch, error, alert, history, isAuthenticated, redirect]);
 
+
+
   const switchTabs = (e, tab) => {
+
     if (tab === "login") {
       switcherTab.current.classList.add("shiftToNeutral");
       switcherTab.current.classList.remove("shiftToRight");
@@ -90,6 +102,7 @@ const LoginSignUp = ({ history, location }) => {
       registerTab.current.classList.remove("shiftToNeutralForm");
       loginTab.current.classList.remove("shiftToLeft");
     }
+
     if (tab === "register") {
       switcherTab.current.classList.add("shiftToRight");
       switcherTab.current.classList.remove("shiftToNeutral");
@@ -99,12 +112,25 @@ const LoginSignUp = ({ history, location }) => {
     }
   };
 
+
+
+
+
+
+
+
+
+
+
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
         <Fragment>
+
+
+
           <div className="LoginSignUpContainer">
             <div className="LoginSignUpBox">
               <div>
@@ -114,6 +140,11 @@ const LoginSignUp = ({ history, location }) => {
                 </div>
                 <button ref={switcherTab}></button>
               </div>
+
+
+
+
+
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
                 <div className="loginEmail">
                   <MailOutlineIcon />
@@ -138,6 +169,12 @@ const LoginSignUp = ({ history, location }) => {
                 <Link to="/password/forgot">Forget Password ?</Link>
                 <input type="submit" value="Login" className="loginBtn" />
               </form>
+
+
+
+
+
+
               <form
                 className="signUpForm"
                 ref={registerTab}
