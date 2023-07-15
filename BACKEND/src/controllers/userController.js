@@ -8,13 +8,20 @@ const cloudinary = require("cloudinary");
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+
+  const { name, email, password } = req.body;
+  
+  if(!name, !email, !password, !req.body.avatar)
+  {
+    return next(new ErrorHander("All fields are compulsory!!!", 400));
+  }
+
   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "avatars",
     width: 150,
     crop: "scale",
   });
 
-  const { name, email, password } = req.body;
 
   const user = await User.create({
     name,
@@ -85,16 +92,14 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `https://shopify-commerce.netlify.app/password/reset/${resetToken}`;
 
-  const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+  const message = `Hello shopify user, Please click on the link to reset your password :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: `Ecommerce Password Recovery`,
+      subject: `Shopify Password Recovery`,
       message,
     });
 
