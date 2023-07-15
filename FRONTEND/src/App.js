@@ -49,7 +49,7 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState(null);
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("http://localhost:4000/api/v1/stripeapikey");
+    const { data } = await axios.get("https://ecommerce-shopify-pzrj.vercel.app/api/v1/stripeapikey");
 
     setStripeApiKey(data.stripeApiKey);
   }
