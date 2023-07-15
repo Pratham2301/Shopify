@@ -11,7 +11,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
   const { name, email, password } = req.body;
   
-  if(!name, !email, !password, !req.body.avatar)
+  if(!name || !email || !password || !req.body.avatar)
   {
     return next(new ErrorHander("All fields are compulsory!!!", 400));
   }
