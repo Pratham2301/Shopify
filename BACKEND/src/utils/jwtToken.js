@@ -10,10 +10,10 @@ const sendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
     sameSite: "none",
-    secure: "false",
+    secure: "false"
   };
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://shopify-commerce.netlify.app/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://shopify-commerce.netlify.app');
   res.setHeader('Access-Control-Allow-Credentials', true);
 
   res.status(statusCode).cookie("token", token, options).json({

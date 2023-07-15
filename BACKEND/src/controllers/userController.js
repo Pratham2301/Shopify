@@ -59,7 +59,12 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
+    sameSite: "none",
+    secure: "false"
   });
+
+  res.setHeader('Access-Control-Allow-Origin', 'https://shopify-commerce.netlify.app');
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
   res.status(200).json({
     success: true,
